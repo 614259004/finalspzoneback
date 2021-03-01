@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
@@ -74,7 +73,7 @@ class Customer extends ResourceController
     }
 
     //เพื่มที่อยู่
-    public function addAddress($id=null)
+    public function addAddress()
     {   
         try{
         $db = \Config\Database::connect();
@@ -106,7 +105,7 @@ class Customer extends ResourceController
             'A_moo' => $this->request->getVar('A_moo'),
             'A_postal_code' => $this->request->getVar('A_postal_code'),
             'A_receive_name' => $this->request->getVar('A_receive_name'),
-            'C_customerid' => $id,
+            'C_customerid' => $this->request->getVar('C_customerid')
         ];
      
        $address_model->insert($data3);
@@ -123,24 +122,27 @@ class Customer extends ResourceController
         $customer_model = new Customer_model();
 
         $data = [
+
             'C_name' => $this->request->getVar('C_name'),
             'C_lastname' => $this->request->getVar('C_lastname'),
             'C_tel' => $this->request->getVar('C_tel'),
-            'C_image' => $this->request->getVar('C_image')
+            'C_image' => $this->request->getVar('C_image'),
+            'S_statusid' => 2
         ];
-        $customer_model->update($id,$data);
+        $customer_model->update($id, $data);
         $response = [
             'status' => 201,
             'error' => null,
             'message' => 'Updated Profile success'
         ];
+        echo $id;
+        
         return $this->respond($response);
     }
     
     //แก้ไขที่ออยู๋
-    public function updateAddress($id=null){
+    public function updateAddress(){
         $address_model = new Address_model();
-
         $data = [
             'A_homenumber' => $this->request->getVar('A_homenumber'),
             'A_province' => $this->request->getVar('A_province'),
@@ -149,8 +151,9 @@ class Customer extends ResourceController
             'A_moo' => $this->request->getVar('A_moo'),
             'A_postal_code' => $this->request->getVar('A_postal_code'),
             'A_receive_name' => $this->request->getVar('A_receive_name'),
+            'C_customerid' => $this->request->getVar('C_customerid')
         ];
-        $customer_model->update($id,$data);
+        $address_model->update($this->request->getVar('A_addressid'),$data);
         $response = [
             'status' => 201,
             'error' => null,

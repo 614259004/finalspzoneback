@@ -18,7 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Customer');
+//$routes->setDefaultController('Customer');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,11 +32,28 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+//ส่วนลูกค้า
+//สำหรับสมัครสามาชิก
 $routes->post('/customers/addcustomer', 'Customer::addCustomer');
+//สำหรับเพิ่มที่อยู่
 $routes->post('/customers/addaddress', 'Customer::addAddress');
+//สำหรับแสดงหน้าข้อมูลส่วนตัว
 $routes->post('/customers/getprofile', 'Customer::getProfile');
-$routes->put('/customers/updateprofile/(:num)', 'Customer::updateProfile/$1');
-$routes->put('/customers/updateaddress/(:num)', 'Customer::updateAddress/$1');
+//สำหรับอัพเดรทข้อมูลส่วนตัว
+$routes->put('/customers/updateprofile/(:any)', 'Customer::updateProfile/$1');
+//สำหรับอัพเดรทที่อยู่
+$routes->post('/customers/updateaddress', 'Customer::updateAddress');
+
+//ส่วนหมวดหมู่
+//แสดงหมวดหมู่ทั้งหมด
+$routes->get('/categorys/showcate', 'Category::showCate');
+//สำหรับเพิ่มหมวดหมู่
+$routes->post('/categorys/addcate', 'Category::addCate');
+//สำหรับแก้ไขหมวดหมู่
+$routes->put('/categorys/updatecate/(:any)', 'Category::updateCate/$1');
+//สำหรับเปลี่ยนเป็น non-active
+$routes->put('/categorys/updatestatuscate/(:any)', 'Category::updateStatus/$1');
 
 /*
  * --------------------------------------------------------------------
