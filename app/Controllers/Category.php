@@ -14,7 +14,7 @@ class Category extends ResourceController
     public function showCate()
     {
         $category_model = new Category_Model();
-        $data['sp_category'] = $category_model ->where('S_statusid',3) -> findAll();
+        $data['sp_category'] = $category_model ->where('S_statusid',3) -> findColumn('Cg_name');
         return $this -> respond($data);
     }
 
