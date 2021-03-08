@@ -33,7 +33,6 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-//ส่วนลูกค้า
 //สำหรับสมัครสามาชิก
 $routes->post('/customers/addcustomer', 'Customer::addCustomer');
 //สำหรับเพิ่มที่อยู่
@@ -54,6 +53,16 @@ $routes->post('/categorys/addcate', 'Category::addCate');
 $routes->put('/categorys/updatecate/(:any)', 'Category::updateCate/$1');
 //สำหรับเปลี่ยนเป็น non-active
 $routes->put('/categorys/updatestatuscate/(:any)', 'Category::updateStatus/$1');
+
+//ส่วนของแบรนด์
+//แสดงแบร์นทั้งหมด
+$routes->get('/brands/showbrand', 'Brand::showBrand');
+//สำหรับเพิ่มแบร์นสินค้า
+$routes->post('/brands/addbrand', 'Brand::addBrand');
+//สำหรับแก้ไขแบร์นสินค้า
+$routes->put('/brands/updatebrand/(:any)', 'Brand::updateBrand/$1');
+
+
 
 /*
  * --------------------------------------------------------------------
