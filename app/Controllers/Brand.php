@@ -13,13 +13,13 @@ class Brand extends ResourceController
     //get all Brand
     public function index(){
         $model = new BrandModel();
-        $data['sp_band'] = $model -> orderBy('B_bandid','DESC')->findAll();
+        $data['sp_brand'] = $model -> orderBy('B_brandid')->findAll();
         return $this->respond($data);
     }
     //get Brand by id
     public function getBrand($id = null){
         $model = new BrandModel();
-        $data = $model->where('B_bandid',$id)->first();
+        $data = $model->where('B_brandid',$id)->first();
         if($data){
             return $this->respond($data);
         }
@@ -29,9 +29,25 @@ class Brand extends ResourceController
     }
     //create new brand
     public function creat_brand(){
+        $db = \Config\Database::connect();
+        $sql = "SELECT MAX(CAST(SUBSTRING(B_brandid, 3, 6) AS UNSIGNED)) AS maxid FROM sp_brand ";
+        $query = $db->query($sql);
+        $row = $query->getResult();
+        $maxid = $row[0]->maxid;
+        $code = '';
+       if($maxid == null)
+         {
+            $code = 'BR0001';
+         }else{
+                $id = (string) $maxid + 1;
+                $fullid =   str_pad($id,4,'0',STR_PAD_LEFT);
+                $code = 'BR'.$fullid;
+
+         }
+        echo $code;
         $model = new BrandModel();
         $data = [
-            
+            'B_brandid'=>$code,
             'B_name'=>$this->request->getVar('B_name'),
             'B_img'=>$this->request->getVar('B_img')
         ];
@@ -42,6 +58,7 @@ class Brand extends ResourceController
             'message' => 'Brand creat successfully'
         ];
         return $this->respond($response);
+   
     }
     //update brand
     public function update($id = null){
