@@ -61,6 +61,8 @@ $routes->get('/brands/showbrand', 'Brand::showBrand');
 $routes->post('/brands/addbrand', 'Brand::addBrand');
 //สำหรับแก้ไขแบร์นสินค้า
 $routes->put('/brands/updatebrand/(:any)', 'Brand::updateBrand/$1');
+//สำหรับเปลี่ยนstatus brand
+$routes->put('/brands/updatestatusbrand/(:any)', 'Brand::updateStatus/$1');
 
 //ส่วนของสินค้า
 //แสดงสินค้าและรายละเอียดต่างๆ

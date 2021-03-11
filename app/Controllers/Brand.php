@@ -11,10 +11,11 @@ class Brand extends ResourceController
     use ResponseTrait;
 
     //get all Brand
-    public function showBrand(){
-        $model = new Brand_Model();
-        $data['sp_brand'] = $model -> orderBy('B_brandid')->findAll();
-        return $this->respond($data);
+    public function showBrand()
+    {
+        $brand_model = new Brand_Model();
+        $data['sp_brand'] = $brand_model ->where('S_statusid',3) -> findAll();
+        return $this -> respond($data);
     }
     //get Brand by id
     public function getBrand($id = null){
@@ -50,7 +51,8 @@ class Brand extends ResourceController
         $data = [
             'B_brandid'=>$code,
             'B_name'=>$this->request->getVar('B_name'),
-            'B_image'=>$this->request->getVar('B_image')
+            'B_image'=>$this->request->getVar('B_image'),
+            'S_statusid' => 3,
         ];
         $model->insert($data);
         $response =[
@@ -79,6 +81,24 @@ class Brand extends ResourceController
         return $this->respond($response);
     }
 
+    public function updateStatus($id=null){
+        $brand_model = new Brand_Model();
+
+        $data = [
+            'S_statusid' => 4
+        ];
+
+        $brand_model->update($id, $data);
+        $response = [
+            'status' => 201,
+            'error' => null,
+            'message' => 'Delete success'
+        ];
+        echo $id;
+        
+        return $this->respond($response);
+
+    }
 
     //delete brand
    /* public function delete($id=null){

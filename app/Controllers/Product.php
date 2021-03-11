@@ -29,11 +29,11 @@ class Product extends ResourceController
     {   
         try{
         $db = \Config\Database::connect();
-        $builder = $db->table('sp_product');
-        $builder ->where('P_name',$this->request->getVar('P_name'));
 
-        if($builder ->countAllResults() == 0) 
-        {
+        //$builder = $db->table('sp_product');
+        // $builder ->where('P_name',$this->request->getVar('P_name'));
+        //if($builder ->countAllResults() == 0) 
+        //{
 
         $sql = "SELECT MAX(CAST(SUBSTRING(P_productid, 3, 6) AS UNSIGNED)) AS maxid FROM sp_product";
         $query = $db->query($sql);
@@ -69,14 +69,14 @@ class Product extends ResourceController
 
         $product_model->insert($data);
 
-        }else{
+        //}else{
 
-            $sql = "SELECT P_productid FROM `sp_product` WHERE P_name  = '". $this->request->getVar('P_name')."' " ;
+        /*    $sql = "SELECT P_productid FROM `sp_product` WHERE P_name  = '". $this->request->getVar('P_name')."' " ;
             $query = $db->query($sql);
             $row = $query->getResult();
             $code = $row[0]-> P_productid ;
             echo $code;
-        }
+        }*/
 
         
         $size_model = new Size_Model();
