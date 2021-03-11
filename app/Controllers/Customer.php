@@ -51,7 +51,7 @@ class Customer extends ResourceController
             'C_name' => $this->request->getVar('C_name'),
             'C_lastname' => $this->request->getVar('C_lastname'),
             'C_tel' => $this->request->getVar('C_tel'),
-            'C_image' => 'test',
+            'C_image' =>  $this->request->getVar('C_image'),
             'S_statusid' => 2,
 
         ];
