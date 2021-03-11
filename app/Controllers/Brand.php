@@ -17,8 +17,9 @@ class Brand extends ResourceController
         $data['sp_brand'] = $brand_model ->where('S_statusid',3) -> findAll();
         return $this -> respond($data);
     }
+    
     //get Brand by id
-    public function getBrand($id = null){
+    /*public function getBrand($id = null){
         $model = new Brand_Model();
         $data = $model->where('B_brandid',$id)->first();
         if($data){
@@ -27,7 +28,8 @@ class Brand extends ResourceController
         else{
             return $this->failNotFound('No Product found');
         }
-    }
+    }*/
+
     //add new brand
     public function addBrand(){
         $db = \Config\Database::connect();

@@ -69,8 +69,12 @@ $routes->put('/brands/updatestatusbrand/(:any)', 'Brand::updateStatus/$1');
 $routes->get('/products/showproduct', 'Product::showProduct');
 //เพิ่มสินค้า
 $routes->post('/products/addproduct', 'Product::addProduct');
+//เพิ่มไซส์สินค้าและจำนวน
+$routes->post('/products/addsize', 'Product::addSize');
 //แก้ไขข้อมูลสินค้า
 $routes->put('/products/updateproduct/(:any)', 'Product::updateProduct/$1');
+//แก้ไขไซส์
+$routes->put('/products/updatesize/(:any)', 'Product::updateSize/$1');
 
 
 

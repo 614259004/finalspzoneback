@@ -78,18 +78,6 @@ class Product extends ResourceController
             echo $code;
         }*/
 
-        
-        $size_model = new Size_Model();
-        $data2 = [
-
-            'P_productid' => $code,
-            'P_size' => $this->request->getVar('P_size'),
-            'P_size_amount' => $this->request->getVar('P_size_amount'),
-        ];
-
-
-        $size_model->insert($data2);
-
         return true;
         
         } catch(Exception $e){
@@ -98,10 +86,36 @@ class Product extends ResourceController
         
     }
 
+    public function addSize()
+    {
+        try{
+            $db = \Config\Database::connect();
+            $size_model = new Size_Model();
+            $data = [
+                'P_productid' => $this->request->getVar('P_productid'),
+                'P_size' => $this->request->getVar('P_size'),
+                'P_size_amount' => $this->request->getVar('P_size_amount'),
+            ];
+
+            $size_model->insert($data);
+
+            $response = [
+                'status' => 201,
+                'error' => null,
+                'message' => 'ADD size success'
+            ];
+            
+            return $this->respond($response);
+
+            } catch(Exception $e){
+                return $e->getMessage();
+         }
+    }
+
     public function updateProduct($id=null){
 
         $product_model = new Product_Model();
-        $size_model = new Size_Model();
+       // $size_model = new Size_Model();
 
         $data = [
             'P_name' => $this->request->getVar('P_name'),
@@ -115,22 +129,42 @@ class Product extends ResourceController
             'P_image3' => $this->request->getVar('P_image3'),
         ];
 
-        $data2 = [
+       /* $data2 = [
             'P_size_amount' => $this->request->getVar('P_size_amount'),
-        ];
+        ];*/
 
         $product_model->update($id, $data);
-        $size_model->where('P_size',$this->request->getVar('P_size')) ->update($id, $data2);
+        //$size_model->where('P_size',$this->request->getVar('P_size')) ->update($id, $data2);
 
         $response = [
             'status' => 201,
             'error' => null,
-            'message' => 'Updated Profile success'
+            'message' => 'Updated Product success'
         ];
         echo $id;
         
         return $this->respond($response);
         
+    }
+
+    public function updateSize($id=null){
+        $size_model = new Size_Model();
+        $data = [
+
+            'P_size_amount' => $this->request->getVar('P_size_amount'),
+        
+        ];
+        $size_model->where('P_size',$this->request->getVar('P_size'))->update($id, $data);
+        
+        $response = [
+            'status' => 201,
+            'error' => null,
+            'message' => 'Updated Size success'
+        ];
+        echo $id;
+        
+        return $this->respond($response);
+
     }
 
 
