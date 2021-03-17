@@ -44,8 +44,8 @@ class Customer extends ResourceController
          }
         echo $code;
 
-        $customer_model = new Customer_model();
-        $login_model = new Login_model();
+        $customer_model = new Customer_Model();
+        $login_model = new Login_Model();
         $data = [
             'C_customerid' => $code,
             'C_name' => $this->request->getVar('C_name'),
@@ -94,7 +94,7 @@ class Customer extends ResourceController
         echo $code;
 
        
-        $address_model = new Address_model();
+        $address_model = new Address_Model();
         
         $data3= [
             'A_addressid' => $code,
@@ -119,7 +119,7 @@ class Customer extends ResourceController
 
     //แก้ไขข้อมูลส่วนตัว
     public function updateProfile($id=null){
-        $customer_model = new Customer_model();
+        $customer_model = new Customer_Model();
 
         $data = [
 
@@ -142,7 +142,7 @@ class Customer extends ResourceController
     
     //แก้ไขที่ออยู๋
     public function updateAddress(){
-        $address_model = new Address_model();
+        $address_model = new Address_Model();
         $data = [
             'A_homenumber' => $this->request->getVar('A_homenumber'),
             'A_province' => $this->request->getVar('A_province'),
