@@ -17,6 +17,18 @@ class Product extends ResourceController
         $builder->join('sp_category','sp_category.Cg_categoryid = sp_product.Cg_categoryid');
         $builder->join('sp_brand','sp_brand.B_brandid = sp_product.B_brandid');
         $builder->join('sp_size','sp_size.P_productid = sp_product.P_productid');
+        $query = $builder->get();
+        
+        return json_encode($query->getResult());
+
+    }
+
+    public function showProductbyid(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_product');
+        $builder->join('sp_category','sp_category.Cg_categoryid = sp_product.Cg_categoryid');
+        $builder->join('sp_brand','sp_brand.B_brandid = sp_product.B_brandid');
+        $builder->join('sp_size','sp_size.P_productid = sp_product.P_productid');
         $builder->where('sp_product.P_productid',$this->request->getVar('P_productid'));
         $query = $builder->get();
 

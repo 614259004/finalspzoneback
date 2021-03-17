@@ -65,8 +65,10 @@ $routes->put('/brands/updatebrand/(:any)', 'Brand::updateBrand/$1');
 $routes->put('/brands/updatestatusbrand/(:any)', 'Brand::updateStatus/$1');
 
 //ส่วนของสินค้า
-//แสดงสินค้าและรายละเอียดต่างๆ
+//แสดงข้อมูลสินค้าทั้งหมด
 $routes->get('/products/showproduct', 'Product::showProduct');
+//แสดงสินค้าและรายละเอียดต่างๆ
+$routes->get('/products/showproductbyid', 'Product::showProductbyid');
 //เพิ่มสินค้า
 $routes->post('/products/addproduct', 'Product::addProduct');
 //เพิ่มไซส์สินค้าและจำนวน
