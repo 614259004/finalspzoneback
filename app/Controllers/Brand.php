@@ -103,20 +103,26 @@ class Brand extends ResourceController
     }
 
     //delete brand
-   /* public function delete($id=null){
-        $model = new BrandModel();
-        $data = $model->find($id);
-        if($data){
-            $model->delete($id);
+    public function deleteBrand($id=null){
+
+        $db = \Config\Database::connect();
+        $brand_model = new Brand_Model();
+        $builder = $db->table('sp_product');
+        $builder ->where('B_brandid',$id);
+        
+        if($builder ->countAllResults() == 0)
+
+            {
+            $brand_model->delete($id);
             $response =[
                 'status' => 201,
                 'error' => null,
-                'message' => ['Product delete successfully']
+                'message' => ['Brand delete successfully']
             ];
             return $this->respond($response);
         }
         else{
-            return $this->failNotFound("No product found");
+            return "Cannot Delete Brand Because Brand ".$id." Used in Product";
         }
-    }*/
+    }
 }

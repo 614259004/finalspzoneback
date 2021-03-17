@@ -93,6 +93,29 @@ class Category extends ResourceController
 
     }
 
+    public function deleteCate($id=null){
+
+        $db = \Config\Database::connect();
+        $category_model = new Category_Model();
+        $builder = $db->table('sp_product');
+        $builder ->where('Cg_categoryid',$id);
+        
+        if($builder ->countAllResults() == 0)
+
+            {
+            $category_model->delete($id);
+            $response =[
+                'status' => 201,
+                'error' => null,
+                'message' => ['Category delete successfully']
+            ];
+            return $this->respond($response);
+        }
+        else{
+            return "Cannot Delete Category Because Category ".$id." Used in Product";
+        }
+    }
+
 }
 
 ?>

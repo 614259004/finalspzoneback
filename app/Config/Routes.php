@@ -53,6 +53,8 @@ $routes->post('/categorys/addcate', 'Category::addCate');
 $routes->put('/categorys/updatecate/(:any)', 'Category::updateCate/$1');
 //สำหรับเปลี่ยนเป็น non-active
 $routes->put('/categorys/updatestatuscate/(:any)', 'Category::updateStatus/$1');
+//สำหรับลบหมวดหมู่
+$routes->delete('/categorys/deletecate/(:any)', 'Category::deleteCate/$1');
 
 //ส่วนของแบรนด์
 //แสดงแบร์นทั้งหมด
@@ -63,6 +65,8 @@ $routes->post('/brands/addbrand', 'Brand::addBrand');
 $routes->put('/brands/updatebrand/(:any)', 'Brand::updateBrand/$1');
 //สำหรับเปลี่ยนstatus brand
 $routes->put('/brands/updatestatusbrand/(:any)', 'Brand::updateStatus/$1');
+//สำหรับลบแบรนด์ที่ไม่ถูกเรียกใช้
+$routes->delete('/brands/deletebrand/(:any)', 'Brand::deleteBrand/$1');
 
 //ส่วนของสินค้า
 //แสดงข้อมูลสินค้าทั้งหมด
