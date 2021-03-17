@@ -37,6 +37,7 @@ class Product extends ResourceController
     public function showProductandSize(){
         $db = \Config\Database::connect();
         $builder = $db->table('sp_size');
+        $builder->select('P_size, P_size_amount, sp_product.P_productid, P_name');
         $builder->join('sp_product','sp_product.P_productid = sp_size.P_productid');
         $builder->where('sp_size.P_productid',$this->request->getVar('P_productid'));
         $query = $builder->get();
