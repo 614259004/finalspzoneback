@@ -90,7 +90,7 @@ $routes->put('/products/updateproduct/(:any)', 'Product::updateProduct/$1');
 //แก้ไขไซส์
 $routes->put('/products/updatesize/(:any)', 'Product::updateSize/$1');
 //ลบไซส์
-$routes->post('/products/deletesize/', 'Product::deleteSize/');
+$routes->post('/products/deletesize', 'Product::deleteSize');
 
 
 
