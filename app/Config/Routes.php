@@ -74,7 +74,7 @@ $routes->get('/products/showproduct', 'Product::showProduct');
 //แสดงสินค้าและรายละเอียดต่างๆ
 $routes->get('/products/showproductbyid', 'Product::showProductbyid');
 //แสดงไซส์ของสินค้าตัวนั้นๆ
-$routes->post('/products/showproductandsize', 'Product::showProductandSize');
+$routes->get('/products/showproductandsize/(:any)', 'Product::showProductandSize/$1');
 //เพิ่มสินค้า
 $routes->post('/products/addproduct', 'Product::addProduct');
 //เพิ่มไซส์สินค้าและจำนวน
