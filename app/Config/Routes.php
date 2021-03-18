@@ -74,21 +74,21 @@ $routes->delete('/brands/deletebrand/(:any)', 'Brand::deleteBrand/$1');
 
 //ส่วนของสินค้า
 //แสดงข้อมูลสินค้าทั้งหมด
-$routes->get('/products/showproduct', 'Product::showProduct');
+$routes->get('/products/showproduct', 'Product::showProduct'); 
 //แสดงสินค้าและรายละเอียดต่างๆ
-$routes->post('/products/showproductbyid', 'Product::showProductbyid');
+$routes->post('/products/showproductbyid', 'Product::showProductbyid'); 
 //แสดงไซส์ของสินค้าตัวนั้นๆ
-$routes->get('/products/showproductandsize/(:any)', 'Product::showProductandSize/$1');
+$routes->get('/products/showproductandsize/(:any)', 'Product::showProductandSize/$1'); 
 //แสดงไซส์ทั้งหมด
-$routes->get('/products/showsize', 'Product::showSize');
+$routes->get('/products/showsize', 'Product::showSize'); 
 //เพิ่มสินค้า
-$routes->post('/products/addproduct', 'Product::addProduct');
+$routes->post('/products/addproduct', 'Product::addProduct'); 
 //เพิ่มไซส์สินค้าและจำนวน
-$routes->post('/products/addsize', 'Product::addSize');
+$routes->post('/products/addsize', 'Product::addSize'); 
 //แก้ไขข้อมูลสินค้า
-$routes->put('/products/updateproduct/(:any)', 'Product::updateProduct/$1');
+$routes->put('/products/updateproduct/(:any)', 'Product::updateProduct/$1'); 
 //แก้ไขไซส์
-$routes->put('/products/updatesize/(:any)', 'Product::updateSize/$1');
+$routes->put('/products/updatesize/(:any)', 'Product::updateSize/$1'); 
 //ลบไซส์
 $routes->post('/products/deletesize', 'Product::deleteSize');
 
