@@ -18,6 +18,17 @@ class Brand extends ResourceController
         return $this -> respond($data);
     }
     
+    //show Product by Brand
+    public function showProductbybrand(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_brand');
+        $builder->join('sp_product','sp_product.B_brandid = sp_brand.B_brandid');
+        $builder->where('sp_brand.B_brandid',$this->request->getVar('B_brandid'));
+        $query = $builder->get();
+
+        return json_encode($query->getResult());
+
+    }
     //get Brand by id
     /*public function getBrand($id = null){
         $model = new Brand_Model();

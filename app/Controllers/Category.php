@@ -18,6 +18,18 @@ class Category extends ResourceController
         return $this -> respond($data);
     }
 
+    //show Product by Category
+    public function showProductbycate(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_category');
+        $builder->join('sp_product','sp_product.Cg_categoryid = sp_category.Cg_categoryid');
+        $builder->where('sp_category.Cg_categoryid',$this->request->getVar('Cg_categoryid'));
+        $query = $builder->get();
+
+        return json_encode($query->getResult());
+
+    }
+
     //add category
     public function addCate()
     {

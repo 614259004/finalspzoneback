@@ -47,6 +47,8 @@ $routes->post('/customers/updateaddress', 'Customer::updateAddress');
 //ส่วนหมวดหมู่
 //แสดงหมวดหมู่ทั้งหมด
 $routes->get('/categorys/showcate', 'Category::showCate');
+//แสดงสินค้าสำหรับหมวดหมู่
+$routes->post('/categorys/showproductbycate', 'Category::showProductbycate');
 //สำหรับเพิ่มหมวดหมู่
 $routes->post('/categorys/addcate', 'Category::addCate');
 //สำหรับแก้ไขหมวดหมู่
@@ -59,6 +61,8 @@ $routes->delete('/categorys/deletecate/(:any)', 'Category::deleteCate/$1');
 //ส่วนของแบรนด์
 //แสดงแบร์นทั้งหมด
 $routes->get('/brands/showbrand', 'Brand::showBrand');
+//แสดงสินค้าสำหรับแต่ละแบรนด์
+$routes->post('/brands/showproductbybrand', 'Brand::showProductbybrand');
 //สำหรับเพิ่มแบร์นสินค้า
 $routes->post('/brands/addbrand', 'Brand::addBrand');
 //สำหรับแก้ไขแบร์นสินค้า
@@ -72,10 +76,10 @@ $routes->delete('/brands/deletebrand/(:any)', 'Brand::deleteBrand/$1');
 //แสดงข้อมูลสินค้าทั้งหมด
 $routes->get('/products/showproduct', 'Product::showProduct');
 //แสดงสินค้าและรายละเอียดต่างๆ
-$routes->get('/products/showproductbyid', 'Product::showProductbyid');
+$routes->post('/products/showproductbyid', 'Product::showProductbyid');
 //แสดงไซส์ของสินค้าตัวนั้นๆ
 $routes->get('/products/showproductandsize/(:any)', 'Product::showProductandSize/$1');
-//สแดงไซส์ทั้งหมด
+//แสดงไซส์ทั้งหมด
 $routes->get('/products/showsize', 'Product::showSize');
 //เพิ่มสินค้า
 $routes->post('/products/addproduct', 'Product::addProduct');
@@ -85,6 +89,8 @@ $routes->post('/products/addsize', 'Product::addSize');
 $routes->put('/products/updateproduct/(:any)', 'Product::updateProduct/$1');
 //แก้ไขไซส์
 $routes->put('/products/updatesize/(:any)', 'Product::updateSize/$1');
+//ลบไซส์
+$routes->post('/products/deletesize/', 'Product::deleteSize/');
 
 
 

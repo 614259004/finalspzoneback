@@ -33,7 +33,8 @@ class Product extends ResourceController
         return json_encode($query->getResult());
 
     }
-    //get all Brand
+   
+
     public function showSize()
     {
         $size_model = new Size_Model();
@@ -179,6 +180,7 @@ class Product extends ResourceController
     }
 
     public function updateSize($id=null){
+        $db = \Config\Database::connect();
         $size_model = new Size_Model();
         $data = [
 
@@ -197,6 +199,25 @@ class Product extends ResourceController
         return $this->respond($response);
 
     }
+
+    public function deleteSize(){
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_size');
+        
+        $data = [
+
+            'P_productid' => $this->request->getVar('P_productid'),
+            'P_size' => $this->request->getVar('P_size')
+        ];
+
+        $builder -> where($data);
+        $builder ->delete();
+
+        return true ;
+     
+    }
+
 
 
 
