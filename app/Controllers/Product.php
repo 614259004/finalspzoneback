@@ -33,6 +33,13 @@ class Product extends ResourceController
         return json_encode($query->getResult());
 
     }
+    //get all Brand
+    public function showSize()
+    {
+        $size_model = new Size_Model();
+        $data['sp_size'] =  $size_model -> findAll();
+        return $this -> respond($data);
+    }
 
     public function showProductandSize($id=null){
         $db = \Config\Database::connect();
