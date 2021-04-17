@@ -4,6 +4,7 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 use Codeigniter\API\ResponseTrait;
 use App\Models\Category_Model;
+use App\Models\Size_Model;
 
 class Recheck extends ResourceController{
 
@@ -35,6 +36,26 @@ class Recheck extends ResourceController{
 
     }
 
+    public function checkSize(){
 
+        $db = \Config\Database::connect();
+        $id = $this->request->getVar('P_productid');
+        $size = $this->request->getVar('P_size');
+        $builder = $db->table('sp_size');
+        $builder->where('P_productid',$id);
+        $builder->where('P_size',$size);
+ 
+      if($builder->countAllResults() >=1){
+            echo "true"; 
+            return true;
+        }else{
+            echo "false";
+            return false;
+        }
+
+
+    }
+
+    
     
 }

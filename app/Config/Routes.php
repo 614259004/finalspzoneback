@@ -95,6 +95,7 @@ $routes->post('/products/deletesize', 'Product::deleteSize');
 //ส่วนเช็คซ้ำไม่ซ้ำ
 //เช็คข้อมูลซ้ำของตารางหมวดหมู่สินค้า
 $routes->post('/recheck/checkduplicatename', 'Recheck::checkDuplicateName');
+$routes->post('/recheck/checkSize', 'Recheck::checkSize');
 
 
 
