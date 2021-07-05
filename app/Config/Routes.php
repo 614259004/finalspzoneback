@@ -43,6 +43,8 @@ $routes->post('/customers/getprofile', 'Customer::getProfile');
 $routes->put('/customers/updateprofile/(:any)', 'Customer::updateProfile/$1');
 //สำหรับอัพเดรทที่อยู่
 $routes->post('/customers/updateaddress', 'Customer::updateAddress');
+//สำหรับlogin
+$routes->post('/customers/login','Customer::login');
 
 //ส่วนหมวดหมู่
 //แสดงหมวดหมู่ทั้งหมด

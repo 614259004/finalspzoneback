@@ -162,4 +162,20 @@ class Customer extends ResourceController
         return $this->respond($response);
     }
 
+    //login 
+
+    public function login(){
+        $db = \Config\Database::connect();
+        
+        $email = $this->request->getVar('L_email');
+        $password = md5($this->request->getVar('L_password'));
+        $builder = $db->table('sp_login');
+        $builder->join('sp_customer','sp_login.C_customerid = sp_customer.C_customerid');
+        $builder->where('L_email',$email);
+        $builder->where('L_password',$password);
+        $query = $builder->get();
+        return json_encode($query->getResult());
+
+    }
+
 }
