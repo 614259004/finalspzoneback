@@ -14,8 +14,19 @@ class Customer extends ResourceController
     public function getProfile(){
         $db = \Config\Database::connect();
         $builder = $db->table('sp_customer');
-        $builder->join('sp_address','sp_address.C_customerid = sp_customer.C_customerid');
         $builder->join('sp_login','sp_login.C_customerid = sp_customer.C_customerid');
+        $builder->where('sp_customer.C_customerid',$this->request->getVar('C_customerid'));
+        $query = $builder->get();
+
+        return json_encode($query->getResult());
+
+    }
+
+    //ดูข้อมูลที่อยู่
+    public function getAddress(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_customer');
+        $builder->join('sp_address','sp_address.C_customerid = sp_customer.C_customerid');
         $builder->where('sp_customer.C_customerid',$this->request->getVar('C_customerid'));
         $query = $builder->get();
 
