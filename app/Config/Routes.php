@@ -103,7 +103,7 @@ $routes->post('/products/deletesize', 'Product::deleteSize');
 $routes->post('/carts/addcart', 'Cart::addCart'); 
 $routes->post('/carts/showcartbyid', 'Cart::showcartbyid');
 $routes->post('/carts/deletecartbyid', 'Cart::deleteCartbyid');
-$routes->put('carts/updatecartbyid/(:any)', 'Cart::updateCartbyid/$1');
+$routes->put('/carts/updatecartbyid/(:any)', 'Cart::updateCartbyid/$1');
 
 //ส่วนเช็คซ้ำไม่ซ้ำ
 //เช็คข้อมูลซ้ำของตารางหมวดหมู่สินค้า

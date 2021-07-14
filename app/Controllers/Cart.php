@@ -29,10 +29,13 @@ class Cart extends ResourceController
 
     public function showCartbyid(){
 
-        
-        $cart_model = new Cart_Model();
-        $data['sp_cart'] = $cart_model ->where('C_customerid',$this->request->getVar('C_customerid')) -> findAll();
-        return $this -> respond($data);
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_cart');
+        $builder->join('sp_product','sp_product.P_productid = sp_cart.P_productid');
+        $builder->where('sp_cart.C_customerid',$this->request->getVar('C_customerid'));
+        $query = $builder->get();
+
+        return json_encode($query->getResult());
 
         }
 
