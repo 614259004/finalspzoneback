@@ -36,6 +36,29 @@ class Cart extends ResourceController
 
         }
 
+        public function updateCartbyid($id=null){
+            
+            
+            $db = \Config\Database::connect();
+            $cart_model = new Cart_Model();
+            $data = [
+    
+                'Ca_amount' => $this->request->getVar('Ca_amount'),
+            
+            ];
+            $cart_model->where('P_productid',$this->request->getVar('P_productid'))->update($id, $data);
+            
+            $response = [
+                'status' => 201,
+                'error' => null,
+                'message' => 'Updated amount in cart success'
+            ];
+            echo $id;
+            
+            return $this->respond($response);
+    
+        }
+
         public function deleteCartbyid(){
 
             
