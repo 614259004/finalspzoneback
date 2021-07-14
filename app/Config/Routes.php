@@ -97,10 +97,19 @@ $routes->put('/products/updatesize/(:any)', 'Product::updateSize/$1');
 //ลบไซส์
 $routes->post('/products/deletesize', 'Product::deleteSize');
 
+
+//สำหรับรถเข็น
+//เพิ่มเข้ารถเข็น
+$routes->post('/carts/addcart', 'Cart::addCart'); 
+$routes->post('/carts/showcartbyid', 'Cart::showcartbyid');
+$routes->post('/carts/deletecartbyid', 'Cart::deleteCartbyid');
+
 //ส่วนเช็คซ้ำไม่ซ้ำ
 //เช็คข้อมูลซ้ำของตารางหมวดหมู่สินค้า
 $routes->post('/recheck/checkduplicatename', 'Recheck::checkDuplicateName');
 $routes->post('/recheck/checkSize', 'Recheck::checkSize');
+
+
 
 
 

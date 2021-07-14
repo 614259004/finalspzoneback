@@ -200,7 +200,7 @@ class Product extends ResourceController
 
     }
 
-    public function deleteSize(){
+    public function deleteCartbyid(){
 
         $db = \Config\Database::connect();
         $builder = $db->table('sp_size');
