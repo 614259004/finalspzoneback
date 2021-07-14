@@ -15,6 +15,7 @@ class Cart extends ResourceController
             'Ca_cartid',
             'P_productid' => $this->request->getVar('P_productid'),
             'C_customerid' => $this->request->getVar('C_customerid'),
+            'P_size' => $this->request->getvar('M'),
             'Ca_amount'  => $this->request->getVar('Ca_amount'),
         ];
 
