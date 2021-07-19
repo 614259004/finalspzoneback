@@ -35,16 +35,16 @@ class Order extends ResourceController
         $order_model = new Order_Model();
     
         $data = [
+
             'Or_orderid' => $code,
             'Or_price' => $this->request->getVar('Or_price'),
             'Or_order_code' => $this->request->getVar('Or_order_code'),
             'C_customerid' => $this->request->getVar('C_customerid'),
-            'S_statusid' => $this->request->getVar('S_statusid'),
+            'S_statusid' => 5,
             'A_addressid' => $this->request->getVar('A_addressid'),
             'Or_imgpayment' => $this->request->getVar('Or_imgpayment'),
         ];
 
-       
         $order_model->insert($data);
 
         $builder = $db->table('sp_cart');
