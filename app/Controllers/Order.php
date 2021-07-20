@@ -40,7 +40,7 @@ class Order extends ResourceController
             'Or_price' => $this->request->getVar('Or_price'),
             'Or_order_code' => $this->request->getVar('Or_order_code'),
             'C_customerid' => $this->request->getVar('C_customerid'),
-            'S_statusid' => 5,
+            'OS_statusid' => 5,
             'A_addressid' => $this->request->getVar('A_addressid'),
             'Or_imgpayment' => $this->request->getVar('Or_imgpayment'),
         ];
@@ -98,7 +98,7 @@ class Order extends ResourceController
         $db = \Config\Database::connect();
         $order_model = new Order_Model();
         $data = [
-            'S_statusid' => 6,
+            'OS_statusid' => 6,
         ];
 
         $order_model->update($id, $data);
