@@ -120,8 +120,24 @@ class Order extends ResourceController
             }
 
           }
+    
+    
+          }
+    public function showOrder(){
 
+            $order_model = new Order_Model();
+            $data['sp_order'] = $order_model ->findAll();
+            return $this -> respond($data);
      }
+
+    public function showOrderdetailbyid(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_ordertail');
+        $builder->join('sp_product','sp_product.P_productid = sp_ordertail.P_productid');
+        $builder->where('sp_ordertail.P_productid',$this->request->getVar('P_productid'));
+        $query = $builder->get();
+        return json_encode($query->getResult());
+    }
 
 }
 

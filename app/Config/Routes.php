@@ -108,8 +108,16 @@ $routes->put('/carts/updatecartbyid/(:any)', 'Cart::updateCartbyid/$1');
 
 //สำหรับ order
 $routes->post('/orders/addorder', 'Order::addOrder'); 
+//แสดงorderbyidcustomer
 $routes->post('/orders/showoderbyid', 'Order::showOderbyid');
+//แสดงorderที่ลูกค้าสั่งทั้งหมด
+$routes->get('/orders/showorder', 'Order::showOrder');
+//แสดงorderdetailbyproductid
+$routes->post('/orders/showOrderdetailbyid', 'Order::showOrderdetailbyid');
+//ยืนยันการสั่งซื้อของลูกค้า
 $routes->put('/orders/confirmorder/(:any)', 'Order::conFirmorder/$1');
+
+
 
 
 
