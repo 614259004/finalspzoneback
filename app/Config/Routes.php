@@ -109,6 +109,7 @@ $routes->put('/carts/updatecartbyid/(:any)', 'Cart::updateCartbyid/$1');
 //สำหรับ order
 $routes->post('/orders/addorder', 'Order::addOrder'); 
 $routes->post('/orders/showoderbyid', 'Order::showOderbyid');
+$routes->put('/orders/confirmorder/(:any)', 'Order::conFirmorder/$1');
 
 
 
