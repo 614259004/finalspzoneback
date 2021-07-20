@@ -84,7 +84,7 @@ class Order extends ResourceController
         $db = \Config\Database::connect();
         $builder = $db->table('sp_order');
         $builder->join('sp_customer','sp_customer.C_customerid = sp_order.C_customerid');
-        $builder->join('sp_status','sp_status.S_statusid = sp_order.S_statusid');
+        $builder->join('sp_status','sp_status.S_statusid = sp_order.OS_statusid');
         $builder->join('sp_address','sp_address.A_addressid = sp_order.A_addressid');
         $builder->where('sp_order.Or_orderid',$this->request->getVar('Or_orderid'));
         $query = $builder->get();
