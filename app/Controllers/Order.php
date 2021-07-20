@@ -123,12 +123,17 @@ class Order extends ResourceController
     
     
           }
+
     public function showOrder(){
 
-            $order_model = new Order_Model();
-            $data['sp_order'] = $order_model ->findAll();
-            return $this -> respond($data);
-     }
+            $db = \Config\Database::connect();
+            $builder = $db->table('sp_order');
+            $builder->join('sp_customer','sp_customer.C_customerid = sp_order.C_customerid');
+            $query = $builder->get();
+
+        return json_encode($query->getResult());
+
+    }
 
     public function showOrderdetailbyid(){
         $db = \Config\Database::connect();
