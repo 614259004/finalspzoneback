@@ -118,7 +118,14 @@ $routes->post('/orders/showOrderdetailbyid', 'Order::showOrderdetailbyid');
 $routes->put('/orders/confirmorder/(:any)', 'Order::conFirmorder/$1');
 
 
-
+//แสดงpromotionทั้งหมด
+$routes->get('/promotions/showPromotion', 'Promotion::showPromotion');
+//เพิ่ม promotiion
+$routes->post('/promotions/addPromotion', 'Promotion::addPromotion'); 
+//ลบ promotion
+$routes->post('/promotions/deletebyid', 'Promotion::deletebyid');
+//แก้ไข้ promotion
+$routes->post('/promotions/updatePromotion', 'Promotion::updatePromotion');
 
 
 //ส่วนเช็คซ้ำไม่ซ้ำ
