@@ -58,6 +58,25 @@ class Order extends ResourceController
           $query = $db->query($sql);
         }
 
+        $builder = $db->table('sp_cart');   //ตรงนี้
+        $builder->where('C_customerid',$this->request->getVar('C_customerid'));
+        $query = $builder->get();
+
+        foreach($query->getResult() as $row){
+            $sql  = "SELECT * FROM sp_size WHERE sp_size.P_productid = '".$row->P_productid."' && sp_size.P_size = '".$row->P_size."'";
+            $query = $db->query($sql);
+            foreach($query->getResult() as $row2){
+                $sum = $row2->P_size_amount - $row->Ca_amount;
+
+                $builder = $db->table('sp_size');
+                $builder->set('P_size_amount',$sum);
+                $builder->where('P_productid',$row->P_productid);
+                $builder->where('P_size',$row->P_size);
+                $builder->update();
+            }
+
+          } //ถึงตรงนี้
+
         $builder = $db->table('sp_cart');
         $data = [
 
@@ -100,29 +119,43 @@ class Order extends ResourceController
         $data = [
             'OS_statusid' => 6,
         ];
-
+            
         $order_model->update($id, $data);
 
-        $builder = $db->table('sp_ordertail');
-        $builder->where('Or_orderid',$id);
-        $query = $builder->get(); 
-        foreach($query->getResult() as $row){
-            $sql  = "SELECT * FROM sp_size WHERE sp_size.P_productid = '".$row->P_productid."' && sp_size.P_size = '".$row->P_size."'";
-            $query = $db->query($sql);
-            foreach($query->getResult() as $row2){
-                $sum = $row2->P_size_amount - $row->Od_amount;
-
-                $builder = $db->table('sp_size');
-                $builder->set('P_size_amount',$sum);
-                $builder->where('P_productid',$row->P_productid);
-                $builder->where('P_size',$row->P_size);
-                $builder->update();
-            }
-
           }
+
+    public function cancleOrder($id=null){
+        
+
+            $db = \Config\Database::connect();
+            $order_model = new Order_Model();
+            $data = [
+                'OS_statusid' => 7,
+            ];
+
+            $order_model->update($id, $data);
+
+            $builder = $db->table('sp_ordertail');   //ตรงนี้
+            $builder->where('Or_orderid',$id);
+            $query = $builder->get();
     
+            foreach($query->getResult() as $row){
+                $sql  = "SELECT * FROM sp_size WHERE sp_size.P_productid = '".$row->P_productid."' && sp_size.P_size = '".$row->P_size."'";
+                $query = $db->query($sql);
+                foreach($query->getResult() as $row2){
+                    $sum = $row2->P_size_amount + $row->Od_amount;
     
-          }
+                    $builder = $db->table('sp_size');
+                    $builder->set('P_size_amount',$sum);
+                    $builder->where('P_productid',$row->P_productid);
+                    $builder->where('P_size',$row->P_size);
+                    $builder->update();
+                }
+    
+              } //
+    
+              }
+
 
     public function showOrder(){
 
