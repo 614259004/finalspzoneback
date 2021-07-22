@@ -116,6 +116,7 @@ class Customer extends ResourceController
             'A_moo' => $this->request->getVar('A_moo'),
             'A_postal_code' => $this->request->getVar('A_postal_code'),
             'A_receive_name' => $this->request->getVar('A_receive_name'),
+            'A_phone' => $this->request->getVar('A_phone'),
             'C_customerid' => $this->request->getVar('C_customerid')
         ];
      
@@ -162,6 +163,7 @@ class Customer extends ResourceController
             'A_moo' => $this->request->getVar('A_moo'),
             'A_postal_code' => $this->request->getVar('A_postal_code'),
             'A_receive_name' => $this->request->getVar('A_receive_name'),
+            'A_phone' => $this->request->getVar('A_phone'),
             'C_customerid' => $this->request->getVar('C_customerid')
         ];
         $address_model->update($this->request->getVar('A_addressid'),$data);

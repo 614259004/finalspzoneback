@@ -116,6 +116,9 @@ $routes->get('/orders/showorder', 'Order::showOrder');
 $routes->post('/orders/showOrderdetailbyid', 'Order::showOrderdetailbyid');
 //ยืนยันการสั่งซื้อของลูกค้า
 $routes->put('/orders/confirmorder/(:any)', 'Order::conFirmorder/$1');
+//ยกเลิกorderกรณีตรวจสอบไม่ถูกต้อง
+$routes->put('/orders/cancleorder/(:any)', 'Order::cancleOrder/$1');
+
 
 
 
