@@ -162,6 +162,7 @@ class Order extends ResourceController
             $db = \Config\Database::connect();
             $builder = $db->table('sp_order');
             $builder->join('sp_customer','sp_customer.C_customerid = sp_order.C_customerid');
+            $builder->orderBy('Or_date','DESC');
             $query = $builder->get();
 
         return json_encode($query->getResult());
