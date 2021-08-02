@@ -59,24 +59,6 @@ class Order extends ResourceController
           $query = $db->query($sql);
         }
 
-        $builder = $db->table('sp_cart');   //ตรงนี้
-        $builder->where('C_customerid',$this->request->getVar('C_customerid'));
-        $query = $builder->get();
-
-        foreach($query->getResult() as $row){
-            $sql  = "SELECT * FROM sp_size WHERE sp_size.P_productid = '".$row->P_productid."' && sp_size.P_size = '".$row->P_size."'";
-            $query = $db->query($sql);
-            foreach($query->getResult() as $row2){
-                $sum = $row2->P_size_amount - $row->Ca_amount;
-
-                $builder = $db->table('sp_size');
-                $builder->set('P_size_amount',$sum);
-                $builder->where('P_productid',$row->P_productid);
-                $builder->where('P_size',$row->P_size);
-                $builder->update();
-            }
-
-          } //ถึงตรงนี้
 
         $builder = $db->table('sp_cart');
         $data = [
@@ -177,6 +159,39 @@ class Order extends ResourceController
         $builder->where('sp_ordertail.Or_orderid',$this->request->getVar('Or_orderid'));
         $query = $builder->get();
         return json_encode($query->getResult());
+    }
+
+
+
+
+    public function Checkoutstock(){
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_cart');   //ตรงนี้
+        $builder->where('C_customerid',$this->request->getVar('C_customerid'));
+        $query = $builder->get();
+
+        foreach($query->getResult() as $row){
+            $sql  = "SELECT * FROM sp_size WHERE sp_size.P_productid = '".$row->P_productid."' && sp_size.P_size = '".$row->P_size."'";
+            $query = $db->query($sql);
+            foreach($query->getResult() as $row2){
+                $sum = $row2->P_size_amount - $row->Ca_amount;
+
+                $builder = $db->table('sp_size');
+                $builder->set('P_size_amount',$sum);
+                $builder->where('P_productid',$row->P_productid);
+                $builder->where('P_size',$row->P_size);
+                if($builder->update()){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+          } //ถึงตรงนี้
+
+
     }
 
 }
