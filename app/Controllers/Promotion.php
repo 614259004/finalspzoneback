@@ -42,8 +42,12 @@ class Promotion extends ResourceController
             'Pr_sale' => $this->request->getVar('Pr_sale'),
             'Pr_image' => $this->request->getVar('Pr_image'),
             'P_productid' => $this->request->getVar('P_productid'),
+            'Pr_amountPro' => $this->request->getVar('Pr_amountPro'),
+            'Pr_size' => $this->request->getVar('Pr_size'),
+            'Pr_status' => $this->request->getVar('Pr_status'),
             
         ];
+        
         $promotion_model->insert($data);
         return true;
 
@@ -57,6 +61,7 @@ class Promotion extends ResourceController
             //$promotion_model = new Promotion_Model();
             $builder = $db->table('sp_promotion');
             $builder->join('sp_product','sp_product.P_productid  = sp_promotion.P_productid');
+            $builder->join('sp_status','sp_status.S_statusid  = sp_promotion.Pr_status');
             $query = $builder->get();
     
             return json_encode($query->getResult());
@@ -72,6 +77,9 @@ class Promotion extends ResourceController
                 'Pr_detail' => $this->request->getVar('Pr_detail'),
                 'Pr_sale' => $this->request->getVar('Pr_sale'),
                 'Pr_image' => $this->request->getVar('Pr_image'),
+                'Pr_amountPro' => $this->request->getVar('Pr_amountPro'),
+                'Pr_size' => $this->request->getVar('Pr_size'),
+                'Pr_status' => $this->request->getVar('Pr_status'),
             ];
             $promotion_model->update($this->request->getVar('Pr_promotion_code'),$data);
             //$model->update($id,$data);
