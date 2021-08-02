@@ -89,7 +89,6 @@ class Product extends ResourceController
             'P_name' => $this->request->getVar('P_name'),
             'P_price' => $this->request->getVar('P_price'),
             'P_detail' => $this->request->getVar('P_detail'),
-            'Pr_promotion_code' => 'PM9999',
             'B_brandid' => $this->request->getVar('B_brandid'),
             'Cg_categoryid' => $this->request->getVar('Cg_categoryid'),
             'P_image1' => $this->request->getVar('P_image1'),
@@ -153,7 +152,6 @@ class Product extends ResourceController
             'P_name' => $this->request->getVar('P_name'),
             'P_price' => $this->request->getVar('P_price'),
             'P_detail' => $this->request->getVar('P_detail'),
-            'Pr_promotion_code' => 'PM9999',
             'B_brandid' => $this->request->getVar('B_brandid'),
             'Cg_categoryid' => $this->request->getVar('Cg_categoryid'),
             'P_image1' => $this->request->getVar('P_image1'),
@@ -200,7 +198,7 @@ class Product extends ResourceController
 
     }
 
-    public function deleteCartbyid(){
+    public function deleteSize(){
 
         $db = \Config\Database::connect();
         $builder = $db->table('sp_size');

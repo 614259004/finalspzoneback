@@ -35,7 +35,7 @@ class Order extends ResourceController
         $order_model = new Order_Model();
     
         $data = [
-
+           
             'Or_orderid' => $code,
             'Or_price' => $this->request->getVar('Or_price'),
             'Or_order_code' => $this->request->getVar('Or_order_code'),
@@ -43,6 +43,7 @@ class Order extends ResourceController
             'OS_statusid' => 5,
             'A_addressid' => $this->request->getVar('A_addressid'),
             'Or_imgpayment' => $this->request->getVar('Or_imgpayment'),
+            'Or_Pr_id' => $this->request->getVar('Or_Pr_id'),
         ];
 
         $order_model->insert($data);

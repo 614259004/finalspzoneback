@@ -10,7 +10,6 @@ class Product_Model extends Model{
                                     'P_name',
                                         'P_price',
                                             'P_detail',
-                                                'Pr_promotion_code',
                                                         'B_brandid',
                                                             'Cg_categoryid',
                                                                 'P_image1',
