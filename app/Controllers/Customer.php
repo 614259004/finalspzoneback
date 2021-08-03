@@ -202,4 +202,21 @@ class Customer extends ResourceController
 
     }
 
+    public function deleteAddressbyid(){
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_address');
+        
+        $data = [
+
+            'A_addressid' => $this->request->getVar('A_addressid')
+        ];
+
+        $builder -> where($data);
+        $builder ->delete();
+
+        return true ;
+     
+    }
+
 }

@@ -47,6 +47,8 @@ $routes->post('/customers/updateaddress', 'Customer::updateAddress');
 $routes->post('/customers/login','Customer::login');
 //สำหรับดูข้อมูลที่อยู่
 $routes->post('/customers/getaddress', 'Customer::getAddress');
+//สำหรับลบที่อยู่
+$routes->post('/customers/deleteaddressbyid', 'Customer::deleteAddressbyid');
 
 
 //ส่วนหมวดหมู่
