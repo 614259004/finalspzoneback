@@ -40,7 +40,7 @@ $routes->post('/customers/addaddress', 'Customer::addAddress');
 //สำหรับแสดงหน้าข้อมูลส่วนตัว
 $routes->post('/customers/getprofile', 'Customer::getProfile');
 //สำหรับอัพเดรทข้อมูลส่วนตัว
-$routes->put('/customers/updateprofile/(:any)', 'Customer::updateProfile/$1');
+$routes->post('/customers/updateprofile', 'Customer::updateProfile');
 //สำหรับอัพเดรทที่อยู่
 $routes->post('/customers/updateaddress', 'Customer::updateAddress');
 //สำหรับlogin

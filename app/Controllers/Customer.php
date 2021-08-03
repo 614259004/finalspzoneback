@@ -130,9 +130,9 @@ class Customer extends ResourceController
     }
 
     //แก้ไขข้อมูลส่วนตัว
-    public function updateProfile($id=null){
-        $customer_model = new Customer_Model();
+    public function updateProfile(){
 
+        $customer_model = new Customer_Model();
         $data = [
 
             'C_name' => $this->request->getVar('C_name'),
@@ -141,7 +141,16 @@ class Customer extends ResourceController
             'C_image' => $this->request->getVar('C_image'),
             'S_statusid' => 2
         ];
-        $customer_model->update($id, $data);
+
+        $login_model = new Login_Model();
+        $data2 = [
+            
+            'L_email' => $this->request->getVar('L_email'),
+        ];
+
+        $customer_model->update( $this->request->getVar('C_customerid'),$data);
+        $login_model->update($this->request->getVar('C_customerid'),$data2);
+
         $response = [
             'status' => 201,
             'error' => null,
@@ -150,7 +159,9 @@ class Customer extends ResourceController
         echo $id;
         
         return $this->respond($response);
+        
     }
+
     
     //แก้ไขที่ออยู๋
     public function updateAddress(){
