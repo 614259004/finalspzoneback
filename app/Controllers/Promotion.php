@@ -58,7 +58,7 @@ class Promotion extends ResourceController
 
         public function showPromotion(){
             $db = \Config\Database::connect();
-            //$promotion_model = new Promotion_Model();
+            $promotion_model = new Promotion_Model();
             $builder = $db->table('sp_promotion');
             $builder->join('sp_product','sp_product.P_productid  = sp_promotion.P_productid');
             $builder->join('sp_status','sp_status.S_statusid  = sp_promotion.Pr_status');
@@ -67,6 +67,19 @@ class Promotion extends ResourceController
             return json_encode($query->getResult());
     
         }
+        public function showPromotionbystatus(){
+            $db = \Config\Database::connect();
+            $promotion_model = new Promotion_Model();
+            $builder = $db->table('sp_promotion');
+            $builder->join('sp_product','sp_product.P_productid  = sp_promotion.P_productid');
+            $builder->join('sp_status','sp_status.S_statusid  = sp_promotion.Pr_status');
+            $builder->where('Pr_status',8)
+            $query = $builder->get();
+    
+            return json_encode($query->getResult());
+    
+        }
+
 
         public function updatePromotion(){
             

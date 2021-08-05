@@ -129,6 +129,8 @@ $routes->post('/orders/checkoutstock', 'Order::Checkoutstock');
 
 //แสดงpromotionทั้งหมด
 $routes->get('/promotions/showPromotion', 'Promotion::showPromotion');
+//แสดงpromotionที่กำลังใช้งาน
+$routes->get('/promotions/showPromotionbystatus', 'Promotion::showPromotionbystatus');
 //เพิ่ม promotiion
 $routes->post('/promotions/addPromotion', 'Promotion::addPromotion'); 
 //ลบ promotion
