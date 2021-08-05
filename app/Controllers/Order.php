@@ -69,6 +69,20 @@ class Order extends ResourceController
         $builder -> where($data);
         $builder ->delete();
 
+        $builder = $db->table('sp_promotion');
+        $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
+        $query = $builder->get();
+        $Pmdata = $query->getResult();
+        $sum = $Pmdata->Pr_amountPro - 1;
+        echo $sum;
+        $builder = $db->table('sp_promotion');
+        $builder->set('Pr_amountPro',$sum);
+        $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
+        $builder->update();
+
+
+
+
         return true;
 
         } 
@@ -88,6 +102,7 @@ class Order extends ResourceController
         $builder->join('sp_customer','sp_customer.C_customerid = sp_order.C_customerid');
         $builder->join('sp_status','sp_status.S_statusid = sp_order.OS_statusid');
         $builder->join('sp_address','sp_address.A_addressid = sp_order.A_addressid');
+        $builder->join('sp_promotion','sp_promotion.Pr_promotion_code = sp_order.Or_Pr_id');
         $builder->where('sp_order.Or_orderid',$this->request->getVar('Or_orderid'));
         $query = $builder->get();
 
