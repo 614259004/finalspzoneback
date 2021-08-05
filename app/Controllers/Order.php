@@ -87,6 +87,13 @@ class Order extends ResourceController
             $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
             $builder->update();
 
+            if($sum == 0){
+                $builder = $db->table('sp_promotion');
+                $builder->set('Pr_status',9);
+                $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
+                $builder->update();
+            }
+
         }
         
 
