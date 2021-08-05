@@ -73,11 +73,23 @@ class Order extends ResourceController
         $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
         $query = $builder->get();
         $Pmdata = $query->getRow();
-        $sum = $Pmdata->Pr_amountPro - 1;
-        $builder = $db->table('sp_promotion');
-        $builder->set('Pr_amountPro',$sum);
-        $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
-        $builder->update();
+        if($Pmdata->Pr_amountPro == 0){
+
+            $builder = $db->table('sp_promotion');
+            $builder->set('Pr_status',9);
+            $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
+            $builder->update();
+
+        }else{
+
+            $sum = $Pmdata->Pr_amountPro - 1;
+            $builder = $db->table('sp_promotion');
+            $builder->set('Pr_amountPro',$sum);
+            $builder->where('Pr_promotion_code',$this->request->getVar('Pr_promotion_code'));
+            $builder->update();
+
+        }
+        
 
         return true;
 
