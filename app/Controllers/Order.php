@@ -124,6 +124,21 @@ class Order extends ResourceController
 
     }
 
+    public function showOderbyCustomerid(){
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_order');
+        $builder->join('sp_customer','sp_customer.C_customerid = sp_order.C_customerid');
+        $builder->join('sp_status','sp_status.S_statusid = sp_order.OS_statusid');
+        $builder->join('sp_address','sp_address.A_addressid = sp_order.A_addressid');
+        $builder->join('sp_promotion','sp_promotion.Pr_promotion_code = sp_order.Or_Pr_id');
+        $builder->where('sp_order.C_customerid',$this->request->getVar('C_customerid'));
+        $query = $builder->get();
+
+        return json_encode($query->getResult());
+
+    }
+
     public function conFirmorder($id=null){
 
         $db = \Config\Database::connect();
