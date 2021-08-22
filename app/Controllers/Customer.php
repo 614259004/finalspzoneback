@@ -6,6 +6,9 @@ use CodeIgniter\API\ResponseTrait; //เปลี่ยนค่าเป็นj
 use App\Models\Customer_Model;
 use App\Models\Login_Model;
 use App\Models\Address_Model;
+use App\Models\Province_Model;
+use App\Models\Amphur_Model;
+use App\Models\District_Model;
 class Customer extends ResourceController
 {
     use ResponseTrait;
@@ -27,6 +30,9 @@ class Customer extends ResourceController
         $db = \Config\Database::connect();
         $builder = $db->table('sp_customer');
         $builder->join('sp_address','sp_address.C_customerid = sp_customer.C_customerid');
+        $builder->join('province','sp_address.A_province = province.PROVINCE_ID');
+        $builder->join('amphur','sp_address.A_district = amphur.AMPHUR_ID');
+        $builder->join('district','sp_address.A_canton = district.DISTRICT_ID');
         $builder->where('sp_customer.C_customerid',$this->request->getVar('C_customerid'));
         $query = $builder->get();
 

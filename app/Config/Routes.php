@@ -118,6 +118,8 @@ $routes->post('/orders/showOderbyCustomerid', 'Order::showOderbyCustomerid');
 $routes->get('/orders/showorder', 'Order::showOrder');
 //แสดงorderdetailbyproductid
 $routes->post('/orders/showOrderdetailbyid', 'Order::showOrderdetailbyid');
+//แสดงorderdetailทังหมด
+$routes->get('/orders/showOrderdetailAll', 'Order::showOrderdetailAll');
 //ยืนยันการสั่งซื้อของลูกค้า
 $routes->put('/orders/confirmorder/(:any)', 'Order::conFirmorder/$1');
 //ยกเลิกorderกรณีตรวจสอบไม่ถูกต้อง
@@ -126,8 +128,23 @@ $routes->put('/orders/cancleorder/(:any)', 'Order::cancleOrder/$1');
 $routes->post('/orders/checkoutstock', 'Order::Checkoutstock');
 
 
+//แสดงจังหวัดทั้งหมด
+$routes->get('/thailand/getprovince', 'Thailand::getProvince');
+
+//แสดงอำเภอทั้งหมด
+$routes->get('/thailand/getamphur', 'Thailand::getAmphur');
+//แสดงอำเภอตามไอดี
+$routes->get('/thailand/getamphurbyid', 'Thailand::getAmphurById');
+//แสดงตำบลทั้งหมด
+$routes->get('/thailand/getdistrict', 'Thailand::getDistrict');
 
 
+//เพิ่มเลขพัสดุ
+$routes->post('/ems/addTracking', 'Order::addTracking');
+//โชว์เลขพัสดุ
+$routes->get('/ems/showTracking', 'Order::showTracking');
+//แก้ไขเลขพัสดุ
+$routes->post('/ems/editTracking', 'Order::editTracking');
 
 //แสดงpromotionทั้งหมด
 $routes->get('/promotions/showPromotion', 'Promotion::showPromotion');
