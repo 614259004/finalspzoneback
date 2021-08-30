@@ -82,6 +82,10 @@ $routes->delete('/brands/deletebrand/(:any)', 'Brand::deleteBrand/$1');
 //ส่วนของสินค้า
 //แสดงข้อมูลสินค้าทั้งหมด
 $routes->get('/products/showproduct', 'Product::showProduct'); 
+//แสดงข้อมูลสินค้าทั้งหมดในสต็อค
+$routes->get('/products/showproductinstock', 'Product::showProductInstock'); 
+//แสดงข้อมูลสินค้าทั้งหมดที่ต้องจอง
+$routes->get('/products/showproductpreorder', 'Product::showProductPreorder');
 //แสดงสินค้าและรายละเอียดต่างๆ
 $routes->post('/products/showproductbyid', 'Product::showProductbyid'); 
 //แสดงไซส์ของสินค้าตัวนั้นๆ
@@ -150,6 +154,8 @@ $routes->post('/ems/editTracking', 'Order::editTracking');
 $routes->get('/promotions/showPromotion', 'Promotion::showPromotion');
 //แสดงpromotionที่กำลังใช้งาน
 $routes->get('/promotions/showPromotionbystatus', 'Promotion::showPromotionbystatus');
+//กรองpromotionที่เคยใช้งาน
+$routes->post('/promotions/checkUsePromotion', 'Promotion::checkUsePromotion');
 //เพิ่ม promotiion
 $routes->post('/promotions/addPromotion', 'Promotion::addPromotion'); 
 //ลบ promotion

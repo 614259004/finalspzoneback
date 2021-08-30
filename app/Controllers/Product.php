@@ -20,6 +20,32 @@ class Product extends ResourceController
         
         return json_encode($query->getResult());
 
+
+        
+    }
+
+    public function showProductInstock(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_product');
+        $builder->join('sp_category','sp_category.Cg_categoryid = sp_product.Cg_categoryid');
+        $builder->join('sp_brand','sp_brand.B_brandid = sp_product.B_brandid');
+        $builder->where('sp_product.P_status',12);
+        $query = $builder->get();
+        
+        return json_encode($query->getResult());
+
+    }
+
+    public function showProductPreorder(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_product');
+        $builder->join('sp_category','sp_category.Cg_categoryid = sp_product.Cg_categoryid');
+        $builder->join('sp_brand','sp_brand.B_brandid = sp_product.B_brandid');
+        $builder->where('sp_product.P_status',13);
+        $query = $builder->get();
+        
+        return json_encode($query->getResult());
+
     }
 
     public function showProductbyid(){
@@ -60,11 +86,6 @@ class Product extends ResourceController
         try{
         $db = \Config\Database::connect();
 
-        //$builder = $db->table('sp_product');
-        // $builder ->where('P_name',$this->request->getVar('P_name'));
-        //if($builder ->countAllResults() == 0) 
-        //{
-
         $sql = "SELECT MAX(CAST(SUBSTRING(P_productid, 3, 6) AS UNSIGNED)) AS maxid FROM sp_product";
         $query = $db->query($sql);
         $row = $query->getResult();
@@ -94,20 +115,14 @@ class Product extends ResourceController
             'P_image1' => $this->request->getVar('P_image1'),
             'P_image2' => $this->request->getVar('P_image2'),
             'P_image3' => $this->request->getVar('P_image3'),
+            'P_status' => $this->request->getVar('P_status')
         ];
+
+
+        
 
         $product_model->insert($data);
 
-        //}else{
-
-        /*    $sql = "SELECT P_productid FROM `sp_product` WHERE P_name  = '". $this->request->getVar('P_name')."' " ;
-            $query = $db->query($sql);
-            $row = $query->getResult();
-            $code = $row[0]-> P_productid ;
-            echo $code;
-
-            
-        }*/
 
         return true;
         
@@ -157,6 +172,7 @@ class Product extends ResourceController
             'P_image1' => $this->request->getVar('P_image1'),
             'P_image2' => $this->request->getVar('P_image2'),
             'P_image3' => $this->request->getVar('P_image3'),
+            'P_status' => $this->request->getVar('P_status')
         ];
 
        /* $data2 = [

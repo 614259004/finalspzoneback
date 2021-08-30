@@ -124,16 +124,11 @@ class Promotion extends ResourceController
 
         public function checkUsePromotion(){
             $db = \Config\Database::connect();
-            $builder = $db->table('sp_order');
-            $builder->join('sp_status','sp_status.S_statusid = sp_order.OS_statusid');
-            $builder->where('sp_order.C_customerid',$this->request->getVar('C_customerid'));
-            $query = $builder->get();
+            $uid =$this->request->getVar('C_customerid');
+            $sql="SELECT * FROM sp_promotion WHERE Pr_promotion_code  NOT IN (SELECT  Or_Pr_id FROM sp_order WHERE C_customerid = '$uid')";
+            $query = $db->query($sql);
 
-            foreach($query->getResult() as $row){
-                $sql  = "SELECT * FROM sp_promotion WHERE sp_promotion.Pr_promotion_code   = '".$row->P_productid."' ";
-                $query = $db->query($sql);
-
-            }
+            return json_encode($query->getResult());
         }
         
 }

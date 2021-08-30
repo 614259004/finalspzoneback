@@ -14,6 +14,6 @@ class Product_Model extends Model{
                                                             'Cg_categoryid',
                                                                 'P_image1',
                                                                     'P_image2',
-                                                                        'P_image3'];
+                                                                        'P_image3','P_status'];
 }
 ?>
