@@ -37,8 +37,12 @@ $routes->setAutoRoute(true);
 $routes->post('/customers/addcustomer', 'Customer::addCustomer');
 //สำหรับโชว์ลูกค้าทั้งหมด
 $routes->get('/customers/getallcustomer', 'Customer::getAllCustomer');
+//สำหรับโชว์ลูกค้าทั้งหมดที่ถูกบล็อค
+$routes->get('/customers/getblockcustomer', 'Customer::getBlockCustomer');
 //บล็อคลูกค้า
 $routes->put('/customers/blockcustomer/(:any)', 'Customer::blockCustomer/$1');
+//ปลดบล็อคลูกค้า
+$routes->put('/customers/unblockcustomer/(:any)', 'Customer::unblockCustomer/$1');
 //สำหรับเพิ่มที่อยู
 $routes->post('/customers/addaddress', 'Customer::addAddress');
 //สำหรับแสดงหน้าข้อมูลส่วนตัว

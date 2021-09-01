@@ -36,10 +36,35 @@ class Customer extends ResourceController
         
     }
 
+    public function getBlockCustomer(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_customer');
+        $builder->join('sp_status','sp_status.S_statusid  = sp_customer.S_statusid');
+        $builder->where('sp_customer.S_statusid',14);
+        $query = $builder->get();
+
+        return json_encode($query->getResult());
+        
+    }
+
     public function blockCustomer($id=null){
         $customer_model = new Customer_Model();
         $data = [
             'S_statusid' => 14
+        ];
+            
+        if($customer_model->update($id, $data)){
+            return "Block success";
+        }else{
+            return "Block fail";
+        }
+        
+    }
+
+    public function unblockCustomer($id=null){
+        $customer_model = new Customer_Model();
+        $data = [
+            'S_statusid' => 2
         ];
             
         if($customer_model->update($id, $data)){
