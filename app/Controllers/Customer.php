@@ -36,6 +36,20 @@ class Customer extends ResourceController
         
     }
 
+    public function blockCustomer($id=null){
+        $customer_model = new Customer_Model();
+        $data = [
+            'S_statusid' => 14
+        ];
+            
+        if($customer_model->update($id, $data)){
+            return "Block success";
+        }else{
+            return "Block fail";
+        }
+        
+    }
+
 
     //ดูข้อมูลที่อยู่
     public function getAddress(){
