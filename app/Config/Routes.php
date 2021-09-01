@@ -35,7 +35,9 @@ $routes->setAutoRoute(true);
 
 //สำหรับสมัครสามาชิก
 $routes->post('/customers/addcustomer', 'Customer::addCustomer');
-//สำหรับเพิ่มที่อยู่
+//สำหรับโชว์ลูกค้าทั้งหมด
+$routes->get('/customers/getallcustomer', 'Customer::getAllCustomer');
+//สำหรับเพิ่มที่อยู
 $routes->post('/customers/addaddress', 'Customer::addAddress');
 //สำหรับแสดงหน้าข้อมูลส่วนตัว
 $routes->post('/customers/getprofile', 'Customer::getProfile');

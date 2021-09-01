@@ -25,6 +25,18 @@ class Customer extends ResourceController
 
     }
 
+    public function getAllCustomer(){
+        $db = \Config\Database::connect();
+        $builder = $db->table('sp_customer');
+        $builder->join('sp_status','sp_status.S_statusid  = sp_customer.S_statusid');
+        $builder->where('sp_customer.S_statusid',2);
+        $query = $builder->get();
+
+        return json_encode($query->getResult());
+        
+    }
+
+
     //ดูข้อมูลที่อยู่
     public function getAddress(){
         $db = \Config\Database::connect();
