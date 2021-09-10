@@ -44,6 +44,7 @@ Options All -Indexes
     ErrorDocument 404 index.php
 </IfModule>
 
+
 # Disable server signature start
-    ServerSignature Off
+    ServerSignature On
 # Disable server signature end
