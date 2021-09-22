@@ -109,6 +109,73 @@ class Order extends ResourceController
 
     }
 
+    // SELECT MONTH(Or_date),SUM(Or_price) from sp_order Where YEAR(Or_date)=2021 GROUP BY MONTH(Or_date);
+
+    //SELECT SUM(Or_price) from sp_order Where YEAR(Or_date)=2021 AND MONTH(Or_date)=8 AND Day(Or_date)=30;
+
+    public function showTotalToDay(){
+        $db = \Config\Database::connect();
+
+        $d = $this->request->getVar('date');
+        $M = $this->request->getVar('months');
+        $Y = $this->request->getVar('year');
+
+        $sql = "SELECT SUM(Or_price) As todayprice from sp_order Where YEAR(Or_date)=$Y AND MONTH(Or_date)=$M AND Day(Or_date)=$d AND OS_statusid =6";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
+
+    public function showTotalThisMonth(){
+        $db = \Config\Database::connect();
+
+        $M = $this->request->getVar('months');
+        $Y = $this->request->getVar('year');
+
+        $sql = "SELECT SUM(Or_price) As thismonthprice from sp_order Where YEAR(Or_date)=$Y AND MONTH(Or_date)=$M  AND OS_statusid =6";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
+    public function showTotalThisYear(){
+        $db = \Config\Database::connect();
+        $Y = $this->request->getVar('year');
+
+        $sql = "SELECT SUM(Or_price) As thisyearprice from sp_order Where YEAR(Or_date)=$Y  AND OS_statusid =6";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
+    public function showAmountSellProductBySize(){
+        $db = \Config\Database::connect();
+        $PID = $this->request->getVar('P_id');
+        $sql = "SELECT P_size,sum(Od_amount) As sellAmount FROM `sp_ordertail`,`sp_order` WHERE P_productid = '$PID' AND sp_order.Or_orderid =sp_ordertail.Or_orderid AND sp_order.OS_statusid =6 GROUP BY P_size";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
+    public function showAmountSellProductByYear(){
+        $db = \Config\Database::connect();
+        $Y = $this->request->getVar('year');
+        
+        $sql = " SELECT MONTH(Or_date) As months,SUM(Or_price) As totalM from sp_order Where YEAR(Or_date)=$Y GROUP BY MONTH(Or_date);";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
+    public function selectYearFromOrder(){
+        $db = \Config\Database::connect();
+        $sql = "SELECT YEAR(Or_date) AS yearr  from sp_order  GROUP BY YEAR(Or_date) ORDER BY yearr DESC; ";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
 
     public function showOderbyid(){
 
@@ -136,6 +203,9 @@ class Order extends ResourceController
         $builder->join('sp_status','sp_status.S_statusid = sp_order.OS_statusid');
         $builder->join('sp_address','sp_address.A_addressid = sp_order.A_addressid');
         $builder->join('sp_promotion','sp_promotion.Pr_promotion_code = sp_order.Or_Pr_id');
+        $builder->join('province','sp_address.A_province = province.PROVINCE_ID');
+        $builder->join('amphur','sp_address.A_district = amphur.AMPHUR_ID');
+        $builder->join('district','sp_address.A_canton = district.DISTRICT_ID');
         $builder->orderBy('Or_date','DESC');
         $builder->where('sp_order.C_customerid',$this->request->getVar('C_customerid'));
         $query = $builder->get();

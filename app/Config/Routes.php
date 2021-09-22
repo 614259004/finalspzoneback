@@ -140,6 +140,24 @@ $routes->put('/orders/cancleorder/(:any)', 'Order::cancleOrder/$1');
 $routes->post('/orders/checkoutstock', 'Order::Checkoutstock');
 
 
+
+//ดูยอดขายของวันปัจจุบัน
+$routes->post('/orders/showtotaltoday', 'Order::showTotalToDay');
+//ดูยอดขายของเดือนปัจจุบัน
+$routes->post('/orders/showtotalthismonth', 'Order::showTotalThisMonth');
+//ดูยอดขายของปีปัจจุบัน
+$routes->post('/orders/showtotalthisyear', 'Order::showTotalThisYear');
+//ดูยอดขายของสินค้าแต่ละไซส์
+$routes->post('/orders/showsellprobysize', 'Order::showAmountSellProductBySize');
+
+//ดูยอดขายของสินค้าแต่ละแบรนด์
+$routes->get('/brands/showsellprobybrand', 'Brand::showAmountSellProductByBrand');
+//ดูยอดขายของสินค้าแต่ละปี
+$routes->post('/orders/showsellprobyyear', 'Order::showAmountSellProductByYear');
+//โชว์ปีที่มีในตารางออเดอร์
+$routes->get('/orders/selectyearfromorder', 'Order::selectYearFromOrder');
+
+
 //แสดงจังหวัดทั้งหมด
 $routes->get('/thailand/getprovince', 'Thailand::getProvince');
 
