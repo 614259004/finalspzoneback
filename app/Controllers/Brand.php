@@ -45,7 +45,7 @@ class Brand extends ResourceController
 
     public function showAmountSellProductByBrand(){
         $db = \Config\Database::connect();
-        $sql = "SELECT sum(Od_amount) AS B_amound,B_name FROM `sp_ordertail`,`sp_order`,`sp_brand`,`sp_product` WHERE sp_product.B_brandid = sp_brand.B_brandid AND sp_order.OS_statusid =6 AND sp_order.Or_orderid =sp_ordertail.Or_orderid GROUP BY B_name";
+        $sql = "SELECT sum(Od_amount) AS B_amound,B_name FROM `sp_ordertail`,`sp_order`,`sp_brand`,`sp_product` WHERE sp_product.B_brandid = sp_brand.B_brandid AND sp_product.P_productid = sp_ordertail.P_productid   AND sp_order.OS_statusid =6 AND sp_order.Or_orderid =sp_ordertail.Or_orderid GROUP BY B_name";
         $query = $db->query($sql);
 
         return json_encode($query->getResult());

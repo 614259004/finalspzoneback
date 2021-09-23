@@ -162,7 +162,7 @@ class Order extends ResourceController
         $db = \Config\Database::connect();
         $Y = $this->request->getVar('year');
         
-        $sql = " SELECT MONTH(Or_date) As months,SUM(Or_price) As totalM from sp_order Where YEAR(Or_date)=$Y GROUP BY MONTH(Or_date);";
+        $sql = " SELECT MONTH(Or_date) As months,SUM(Or_price) As totalM from sp_order Where YEAR(Or_date)=$Y AND OS_statusid =6 GROUP BY MONTH(Or_date);";
         $query = $db->query($sql);
 
         return json_encode($query->getResult());
