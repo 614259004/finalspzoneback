@@ -111,6 +111,9 @@ $routes->put('/products/updatesize/(:any)', 'Product::updateSize/$1');
 //ลบไซส์
 $routes->post('/products/deletesize', 'Product::deleteSize');
 
+//โชว์สินค้าใหม่ล่าสุด
+$routes->get('/products/showproductnewless', 'Product::showProductNewless');
+
 
 //สำหรับรถเข็น
 //เพิ่มเข้ารถเข็น

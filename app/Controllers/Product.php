@@ -233,6 +233,15 @@ class Product extends ResourceController
     }
 
 
+    public function showProductNewless(){
+        $db = \Config\Database::connect();
+        $sql="SELECT * FROM sp_product WHERE P_status=12  ORDER BY P_productid  DESC Limit 5";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
+
 
 
 }

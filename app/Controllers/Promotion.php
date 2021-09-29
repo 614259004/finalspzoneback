@@ -125,7 +125,7 @@ class Promotion extends ResourceController
         public function checkUsePromotion(){
             $db = \Config\Database::connect();
             $uid =$this->request->getVar('C_customerid');
-            $sql="SELECT * FROM sp_promotion WHERE Pr_promotion_code  NOT IN (SELECT  Or_Pr_id FROM sp_order WHERE C_customerid = '$uid')";
+            $sql="SELECT * FROM sp_promotion WHERE Pr_promotion_code  NOT IN (SELECT  Or_Pr_id FROM sp_order WHERE C_customerid = '$uid' AND OS_statusid =6)";
             $query = $db->query($sql);
 
             return json_encode($query->getResult());
