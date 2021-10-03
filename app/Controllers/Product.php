@@ -235,7 +235,16 @@ class Product extends ResourceController
 
     public function showProductNewless(){
         $db = \Config\Database::connect();
-        $sql="SELECT * FROM sp_product WHERE P_status=12  ORDER BY P_productid  DESC Limit 5";
+        $sql="SELECT * FROM sp_product WHERE P_status=12  ORDER BY P_productid  DESC Limit 4";
+        $query = $db->query($sql);
+
+        return json_encode($query->getResult());
+    }
+
+
+    public function showHotProduct(){
+        $db = \Config\Database::connect();
+        $sql="SELECT *,sum(Od_amount) As sellAmount FROM `sp_ordertail`,`sp_order`,`sp_product` WHERE sp_product.P_productid = sp_ordertail.P_productid AND sp_order.Or_orderid =sp_ordertail.Or_orderid AND sp_order.OS_statusid =6 GROUP BY sp_product.P_productid  ORDER BY sellAmount  DESC";
         $query = $db->query($sql);
 
         return json_encode($query->getResult());

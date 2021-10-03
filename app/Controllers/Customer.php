@@ -256,6 +256,8 @@ class Customer extends ResourceController
         $builder->where('L_password',$password);
         $query = $builder->get();
         return json_encode($query->getResult());
+        
+        
 
     }
 

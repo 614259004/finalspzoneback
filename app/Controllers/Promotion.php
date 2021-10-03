@@ -130,5 +130,13 @@ class Promotion extends ResourceController
 
             return json_encode($query->getResult());
         }
+
+        public function showPromotionNewless(){
+            $db = \Config\Database::connect();
+            $sql="SELECT * FROM sp_promotion,sp_product WHERE Pr_status = 8 AND sp_product.P_productid = sp_promotion.P_productid   ORDER BY Pr_promotion_code   DESC Limit 3";
+            $query = $db->query($sql);
+    
+            return json_encode($query->getResult());
+        }
         
 }

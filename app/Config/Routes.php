@@ -113,6 +113,8 @@ $routes->post('/products/deletesize', 'Product::deleteSize');
 
 //โชว์สินค้าใหม่ล่าสุด
 $routes->get('/products/showproductnewless', 'Product::showProductNewless');
+//โชว์สินค้าขายดีที่สุด
+$routes->get('/products/showhotproduct', 'Product::showHotProduct');
 
 
 //สำหรับรถเข็น
@@ -191,6 +193,9 @@ $routes->post('/promotions/addPromotion', 'Promotion::addPromotion');
 $routes->post('/promotions/deletebyid', 'Promotion::deletebyid');
 //แก้ไข้ promotion
 $routes->post('/promotions/updatePromotion', 'Promotion::updatePromotion');
+
+//show  promotion ล่าสุด
+$routes->get('/promotions/showpromotionnew', 'Promotion::showPromotionNewless');
 
 
 //ส่วนเช็คซ้ำไม่ซ้ำ
