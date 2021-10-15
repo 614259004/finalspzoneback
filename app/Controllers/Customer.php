@@ -13,6 +13,11 @@ class Customer extends ResourceController
 {
     use ResponseTrait;
 
+    public function index()
+    {
+        echo 'customer';
+    }
+
     //ดูข้อมูลส่วนตัว
     public function getProfile(){
         $db = \Config\Database::connect();

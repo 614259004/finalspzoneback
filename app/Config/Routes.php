@@ -18,8 +18,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-//$routes->setDefaultController('Customer');
-$routes->setDefaultMethod('index');
+$routes->setDefaultController('Customer');
+$routes->setDefaultMethod('getAllCustomer');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -115,6 +115,11 @@ $routes->post('/products/deletesize', 'Product::deleteSize');
 $routes->get('/products/showproductnewless', 'Product::showProductNewless');
 //โชว์สินค้าขายดีที่สุด
 $routes->get('/products/showhotproduct', 'Product::showHotProduct');
+
+
+$routes->get('/home', 'Home::index');
+
+$routes->get('/', 'Customer::getAllCustomer');
 
 
 //สำหรับรถเข็น
